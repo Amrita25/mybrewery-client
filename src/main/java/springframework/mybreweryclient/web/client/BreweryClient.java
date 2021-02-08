@@ -1,11 +1,18 @@
 package springframework.mybreweryclient.web.client;
 
 import java.net.URI;
+import java.util.Date;
 import java.util.UUID;
+
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -35,6 +42,21 @@ public class BreweryClient {
 	
 	public BeerDto getBeerById(UUID id){
 		return restTemplate.getForObject(apihost+BEER_PATH_V1+id.toString(), BeerDto.class);
+	}
+	
+	public BeerDto getBeerByIdUsingGetForEntity(UUID id){
+		ResponseEntity<BeerDto> response = restTemplate.getForEntity(apihost+BEER_PATH_V1+id.toString(), BeerDto.class);
+		Date lastModifiedDate = new Date(response.getHeaders().getLastModified());
+		System.out.println(lastModifiedDate);
+		return response.getBody();
+	}
+	
+	public BeerDto getBeerByIdUsingExchange(UUID beerID){
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Accept", "application/json");
+		HttpEntity requestEntity = new HttpEntity(headers);
+		ResponseEntity<BeerDto> response = restTemplate.exchange(apihost+BEER_PATH_V1+beerID.toString(), HttpMethod.GET, requestEntity, BeerDto.class);
+		return response.getBody();
 	}
 	
 	public URI saveNewBeer(BeerDto beerDto){

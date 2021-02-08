@@ -21,7 +21,21 @@ public class BreweryClientTest {
 	public void getBeerById(){
 		BeerDto dto = client.getBeerById(UUID.randomUUID());
 		assertNotNull(dto);
-		System.out.println("inside test method");
+		System.out.println("inside getBeerById test method");
+
+	}
+	@Test
+	public void getBeerByIdUsingGetForEntity(){
+		BeerDto dto = client.getBeerById(UUID.randomUUID());
+		assertNotNull(dto);
+		System.out.println("inside getBeerByIdUsingGetForEntity test method");
+
+	}
+	@Test
+	public void getBeerByIdUsingExchange(){
+		BeerDto dto = client.getBeerById(UUID.randomUUID());
+		assertNotNull(dto);
+		System.out.println("inside getBeerByIdUsingExchange test method");
 
 	}
 	
@@ -59,7 +73,7 @@ public class BreweryClientTest {
 	public void testUpdateCustomer(){
 		Customer cust= new Customer();
 		cust.setName("update customer");
-		client.updateCustomer(cust, UUID.randomUUID());
+		//client.updateCustomer(cust, UUID.randomUUID());
 		System.out.println("inside update customer test client");
 	}
 

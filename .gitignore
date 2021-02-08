@@ -1,0 +1,7 @@
+/target
+*.prefs
+*.prefs
+.settings/org.eclipse.wst.common.project.facet.core.xml
+.settings/org.eclipse.jdt.core.prefs
+Local Disk (C) - Shortcut.lnk
+*.class
